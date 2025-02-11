@@ -43,7 +43,7 @@ const Home = () => {
   // Get All Notes
   const getAllNotes = async () => {
     try{
-      const res = await axios.get("http://localhost:3000/api/note/all", {withCredentials: true})
+      const res = await axios.get("https://notenest-66l4.onrender.com/api/note/all", {withCredentials: true})
 
       if(res.data.success === false){
         console.log(res.data)
@@ -69,7 +69,7 @@ const Home = () => {
   const deleteNote = async (data) => {
     const noteId = data._id;
     try {
-      const res = await axios.delete(`http://localhost:3000/api/note/delete/${noteId}`, {withCredentials: true})
+      const res = await axios.delete(`https://notenest-66l4.onrender.com/api/note/delete/${noteId}`, {withCredentials: true})
 
       if(res.data.success === false){
         toast.error(res.data.message)
@@ -85,7 +85,7 @@ const Home = () => {
 
   const onSearchNote = async (query) => {
     try {
-      const res = await axios.get("http://localhost:3000/api/note/search", { 
+      const res = await axios.get("https://notenest-66l4.onrender.com/api/note/search", { 
       params: {query}, 
       withCredentials: true 
     })
@@ -108,7 +108,7 @@ const Home = () => {
   const updateIsPinned = async (noteData) => {
     const noteId = noteData._id;
     try {
-      const res = await axios.put(`http://localhost:3000/api/note/update-note-pinned/${noteId}`, {isPinned: !noteData.isPinned}, {withCredentials: true})
+      const res = await axios.put(`https://notenest-66l4.onrender.com/api/note/update-note-pinned/${noteId}`, {isPinned: !noteData.isPinned}, {withCredentials: true})
 
       if(res.data.success === false){
         toast.error(res.data.message)
