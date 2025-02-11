@@ -21,7 +21,7 @@ const app = express()
 // To make input as JSON
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({ origin: ["http://localhost:5173"], credentials: true }))
+app.use(cors({ origin: ["https://notenest-frontend-g5wp.onrender.com"], credentials: true }))
 
 const port = process.env.PORT
 app.listen(port, () => {
