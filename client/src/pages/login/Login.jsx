@@ -30,7 +30,11 @@ const Login = () => {
     try {
       dispatch(signInStart())
 
-      const res = await axios.post("https://notenest-66l4.onrender.com/api/auth/signin", {email, password}, {withCredentials: true})
+      const res = await axios.post("https://notenest-66l4.onrender.com/api/auth/signin", {email, password},{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }, {withCredentials: true})
 
       if(res.data.success === false){
         console.log(res.data)
