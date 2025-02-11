@@ -26,7 +26,7 @@ const Navbar = ({userInfo, onSearchNote, handleClearSearch}) => {
       try {
         dispatch(signOutStart())
 
-        const res = await axios.get("http://localhost:3000/api/auth/signout", {withCredentials: true})
+        const res = await axios.get("https://notenest-66l4.onrender.com/api/auth/signout", {withCredentials: true})
 
         if(res.data.success === false){
           dispatch(signOutFailure(res.data.message))
