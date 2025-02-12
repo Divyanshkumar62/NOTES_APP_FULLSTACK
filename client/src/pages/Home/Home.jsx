@@ -15,7 +15,7 @@ import { FaUserLarge } from "react-icons/fa6";
 const Home = () => {
   const {currentUser, loading, errorDispatch} = useSelector((state) => state.user)
 
-  const url = "http://localhost:3000"
+  const url = "https://notenest-backend-4zeo.onrender.com"
   const navigate = useNavigate()
 
   const [userInfo, setUserInfo] = useState(null)
