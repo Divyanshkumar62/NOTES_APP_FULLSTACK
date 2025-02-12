@@ -11,7 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
-  const url = "http://localhost:3000"
+  const url = "https://notenest-backend-4zeo.onrender.com"
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
