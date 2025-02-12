@@ -12,7 +12,7 @@ const Signup = () => {
   const [name, setName] = useState("")
 
   const navigate = useNavigate()
-  const url = "http://localhost:3000"
+  const url = "https://notenest-backend-4zeo.onrender.com"
 
   const handleSignup = async (e) => {
     e.preventDefault()
