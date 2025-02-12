@@ -12,7 +12,7 @@ const Navbar = ({userInfo, onSearchNote, handleClearSearch}) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const url = "http://localhost:3000"
+    const url = "https://notenest-backend-4zeo.onrender.com"
 
     const handleSearch = () => {
       if(searchQuery) {
