@@ -29,7 +29,7 @@ connectDB();
 // ✅ Fix 3: CORS should be before cookieParser()
 app.use(cors({
     origin: [
-        "https://notenest-frontend-g5wp.onrender.com",
+        "https://note-nest-f82h.onrender.com",
         "http://localhost:5173"  // ✅ Allow local testing
     ],
     credentials: true
