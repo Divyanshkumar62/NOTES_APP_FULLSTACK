@@ -11,9 +11,10 @@ const AddEditNotes = ({ onClose, noteData, type, getAllNotes }) => {
     const [tags, setTags] = useState(noteData?.tags || [])
     const [error, setError] = useState(null)
     
+    const url = "http://localhost:3000"
     const addNewNote = async () => {
         try {
-            const res = await axios.post("https://notenest-66l4.onrender.com/api/note/add", {title, content, tags}, {withCredentials: true})
+            const res = await axios.post(`${url}/api/note/add`, {title, content, tags}, {withCredentials: true})
 
             if(res.data.success === false){
                 console.log(res.data.message)
@@ -34,7 +35,7 @@ const AddEditNotes = ({ onClose, noteData, type, getAllNotes }) => {
     const editNote = async () => {
         const noteId = noteData._id;
         try {
-            const res = await axios.put(`https://notenest-66l4.onrender.com/api/note/edit/${noteId}`,{title, content, tags}, {withCredentials: true}) 
+            const res = await axios.put(`${url}/api/note/edit/${noteId}`,{title, content, tags}, {withCredentials: true}) 
 
             if(res.data.success == false){
                 console.log(res.data.message)

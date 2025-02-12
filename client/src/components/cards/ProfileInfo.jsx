@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { getInitials } from '../../utils/Helper'
 
 const ProfileInfo = ({ onLogout, userInfo }) => {

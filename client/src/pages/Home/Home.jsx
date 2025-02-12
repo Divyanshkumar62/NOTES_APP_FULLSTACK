@@ -9,11 +9,13 @@ import Navbar from '../../components/Navbar'
 import axios from "axios";
 import { toast } from "react-toastify";
 import EmptyCard from "../../components/EmptyCard/EmptyCard";
+import { FaUserLarge } from "react-icons/fa6";
 
 
 const Home = () => {
   const {currentUser, loading, errorDispatch} = useSelector((state) => state.user)
 
+  const url = "http://localhost:3000"
   const navigate = useNavigate()
 
   const [userInfo, setUserInfo] = useState(null)
@@ -43,7 +45,7 @@ const Home = () => {
   // Get All Notes
   const getAllNotes = async () => {
     try{
-      const res = await axios.get("https://notenest-66l4.onrender.com/api/note/all", {withCredentials: true})
+      const res = await axios.get(`${url}/api/note/all`, {withCredentials: true})
 
       if(res.data.success === false){
         console.log(res.data)
@@ -69,7 +71,7 @@ const Home = () => {
   const deleteNote = async (data) => {
     const noteId = data._id;
     try {
-      const res = await axios.delete(`https://notenest-66l4.onrender.com/api/note/delete/${noteId}`, {withCredentials: true})
+      const res = await axios.delete(`${url}/api/note/delete/${noteId}`, {withCredentials: true})
 
       if(res.data.success === false){
         toast.error(res.data.message)
@@ -85,7 +87,7 @@ const Home = () => {
 
   const onSearchNote = async (query) => {
     try {
-      const res = await axios.get("https://notenest-66l4.onrender.com/api/note/search", { 
+      const res = await axios.get(`${url}/api/note/search`, { 
       params: {query}, 
       withCredentials: true 
     })
@@ -108,7 +110,7 @@ const Home = () => {
   const updateIsPinned = async (noteData) => {
     const noteId = noteData._id;
     try {
-      const res = await axios.put(`https://notenest-66l4.onrender.com/api/note/update-note-pinned/${noteId}`, {isPinned: !noteData.isPinned}, {withCredentials: true})
+      const res = await axios.put(`${url}/api/note/update-note-pinned/${noteId}`, {isPinned: !noteData.isPinned}, {withCredentials: true})
 
       if(res.data.success === false){
         toast.error(res.data.message)
@@ -130,7 +132,7 @@ const Home = () => {
     <div className='container mx-auto'>
       {allNotes?.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 max-md:m-5">
-        {allNotes.map((note, index) => (
+        {allNotes.map((note) => (
             <NoteCard
               key={note._id} 
               title={note.title} 

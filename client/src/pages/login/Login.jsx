@@ -11,6 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const url = "http://localhost:3000"
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -30,7 +31,7 @@ const Login = () => {
     try {
       dispatch(signInStart())
 
-      const res = await axios.post("https://notenest-66l4.onrender.com/api/auth/signin", {email, password}
+      const res = await axios.post(`${url}/api/auth/signin`, {email, password}
       , {withCredentials: true})
 
       if(res.data.success === false){

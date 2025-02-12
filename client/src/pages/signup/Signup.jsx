@@ -12,6 +12,7 @@ const Signup = () => {
   const [name, setName] = useState("")
 
   const navigate = useNavigate()
+  const url = "http://localhost:3000"
 
   const handleSignup = async (e) => {
     e.preventDefault()
@@ -31,7 +32,7 @@ const Signup = () => {
 
     // Backend Logic for signup
     try {
-      const res = await axios.post("https://notenest-66l4.onrender.com/api/auth/signup", {username: name, email, password}, {withCredentials: true})
+      const res = await axios.post(`${url}/api/auth/signup`, {username: name, email, password}, {withCredentials: true})
 
       if(res.data.success === false){
         toast.error(res.data.message)

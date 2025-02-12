@@ -1,50 +1,65 @@
-import express from 'express'
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import cookieParser from 'cookie-parser'
-import cors from 'cors'
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+ 
+dotenv.config();
 
-dotenv.config()
+const app = express();
 
-mongoose
-    .connect(process.env.MONGO_URI)
-    .then(() => {
-    console.log("Connected to MongoDB")
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+// ✅ Fix 1: Use a default port if `process.env.PORT` is undefined
+const PORT = process.env.PORT || 5000;
 
+// ✅ Fix 2: Ensure MongoDB connection is awaited
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log("✅ Connected to MongoDB");
+    } catch (err) {
+        console.error("❌ MongoDB Connection Error:", err);
+        process.exit(1); // Stop the server if DB connection fails
+    }
+};
+connectDB();
 
-const app = express()
+// ✅ Fix 3: CORS should be before cookieParser()
+app.use(cors({
+    origin: [
+        "https://notenest-frontend-g5wp.onrender.com",
+        "http://localhost:5173"  // ✅ Allow local testing
+    ],
+    credentials: true
+}));
 
-// To make input as JSON
-app.use(cors({ origin: ["https://notenest-frontend-g5wp.onrender.com", "http://localhost:5173"], credentials: true }))
+app.use(express.json());  // Parse JSON requests
+app.use(cookieParser());  // Enable cookie parsing
 
-app.use(express.json())
-app.use(cookieParser())
+// ✅ Import Routes
+import authRouter from "./routes/auth.route.js";
+import noteRouter from "./routes/note.route.js";
 
-const port = process.env.PORT || 5000
+app.use("/api/auth", authRouter);
+app.use("/api/note", noteRouter);
 
-// Import Routes
-import authRouter from './routes/auth.route.js'
-import noteRouter from './routes/note.route.js'
-
-app.use('/api/auth', authRouter);
-app.use('/api/note', noteRouter)
-
-// Error Handling
+// ✅ Improved Error Handling Middleware
 app.use((err, req, res, next) => {
-    const statusCode = err.statusCode || 500
-    const message = err.message || "Internal Server Error"
-    
+    console.error("❌ API Error:", err.message);  // Log errors properly
+
+    const statusCode = err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+
     return res.status(statusCode).json({
         success: false,
         statusCode,
         message
-    })
-})
+    });
+});
 
-app.listen(port, () => {
-    console.log(`Server is listening on port: ${port}`)
-})
+// ✅ Start Server
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+});

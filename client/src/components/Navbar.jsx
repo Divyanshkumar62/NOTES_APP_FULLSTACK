@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ProfileInfo from './cards/ProfileInfo'
 import SearchBar from './searchBar/SearchBar'
 import { Link, useNavigate } from 'react-router-dom'
@@ -12,6 +12,7 @@ const Navbar = ({userInfo, onSearchNote, handleClearSearch}) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const url = "http://localhost:3000"
 
     const handleSearch = () => {
       if(searchQuery) {
@@ -26,7 +27,7 @@ const Navbar = ({userInfo, onSearchNote, handleClearSearch}) => {
       try {
         dispatch(signOutStart())
 
-        const res = await axios.get("https://notenest-66l4.onrender.com/api/auth/signout", {withCredentials: true})
+        const res = await axios.get(`${url}/api/auth/signout`, {withCredentials: true})
 
         if(res.data.success === false){
           dispatch(signOutFailure(res.data.message))
@@ -47,8 +48,8 @@ const Navbar = ({userInfo, onSearchNote, handleClearSearch}) => {
     <section className=' bg-white flex justify-between items-center px-6 py-2 drop-shadow'>
         <Link to={'/'}>
           <h2 className='font-semibold text-2xl'>
-            <span className='text-blue-700'>Good</span>
-            <span className='text-gray-700'>Notes</span>
+            <span className='text-blue-700'>Note</span>
+            <span className='text-gray-700'>Nest</span>
           </h2>
         </Link>
         
