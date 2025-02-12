@@ -11,7 +11,7 @@ const AddEditNotes = ({ onClose, noteData, type, getAllNotes }) => {
     const [tags, setTags] = useState(noteData?.tags || [])
     const [error, setError] = useState(null)
     
-    const url = "http://localhost:3000"
+    const url = "https://notenest-backend-4zeo.onrender.com"
     const addNewNote = async () => {
         try {
             const res = await axios.post(`${url}/api/note/add`, {title, content, tags}, {withCredentials: true})
