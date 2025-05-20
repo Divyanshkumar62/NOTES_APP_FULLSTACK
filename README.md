@@ -81,7 +81,3 @@ Contributions are welcome! Please fork the repository and submit pull requests f
 - Thanks to the developers of React, Express, Vite, Tailwind CSS, and MongoDB for providing excellent tools to build modern web applications.
 - Special thanks to the Render team for making deployment straightforward.
   
----
-
-Feel free to modify this README to better suit your project's specifics, add any additional instructions, or include screenshots and usage examples as needed. This should give users a comprehensive guide on what the project is, how to install it, and how to get started.
-
